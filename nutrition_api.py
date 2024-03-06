@@ -3,12 +3,12 @@ from dotenv import load_dotenv
 import os
 
 
-def get_nutritional_value_by_ingredients(ingredients):
+def get_nutritional_value_by_ingredients(ingredient):
     # Charger les informations d'identification depuis le fichier .env
     load_dotenv()
 
     # Base URL de l'API Edamam
-    base_url = "https://api.edamam.com/api/nutrition-details"
+    base_url = "https://api.edamam.com/api/nutrition-data"
 
     # Paramètres de l'API Edamam (app_id et app_key)
     app_id = os.getenv("APP_ID")
@@ -23,21 +23,13 @@ def get_nutritional_value_by_ingredients(ingredients):
     params = {
         "app_id": app_id,
         "app_key": app_key,
-    }
-    data = {
-        "ingredients": [
-            {
-                "quantity": 1,
-                "measureURI": "",
-                "foodId": ingredient
-            }
-            for ingredient in ingredients
-        ]
+        "nutrition-type": "logging",
+        "ingr": ingredient
     }
 
     try:
         print("Envoi de la requête à l'API Edamam...")
-        response = requests.post(base_url, params=params, json=data)
+        response = requests.get(base_url, params=params)
         # Lèvera une exception si le code de statut HTTP n'est pas 2xx
         response.raise_for_status()
         print("Réponse reçue avec succès de l'API Edamam.")
@@ -48,26 +40,26 @@ def get_nutritional_value_by_ingredients(ingredients):
         print(f"Une erreur lors de la requête à l'API Edamam: {err}")
         return None
 
-    # Traiter la réponse et retourner les données nutritionnelles
+    # Traiter la réponse et retourner les données nutritionnelles spécifiques
     if response.status_code == 200:
         nutrition_data = response.json()
-        nutritional_values = {}
-        for ingredient_data in nutrition_data.get("ingredients", []):
-            parsed_data = ingredient_data.get("parsed", {})
-            food_data = parsed_data.get("food", {})
-            ingredient_name = food_data.get("label")
-
-            if ingredient_name:
-                nutritional_values[ingredient_name] = {}
-                parsed_data = ingredient_data.get("parsed", {})
-                nutrients_data = parsed_data.get("nutrients", [])
-                for nutrient in nutrients_data:
-                    nutrient_label = nutrient["label"]
-                    nutrient_quantity = nutrient["quantity"]
-                    nutritional_values[ingredient_name][nutrient_label] = \
-                        nutrient_quantity
-        return nutritional_values
+        # Extraire les données spécifiques
+        diet_labels = nutrition_data.get('dietLabels', [])
+        co2_emissions_class = nutrition_data.get('co2EmissionsClass', "")
+        calories = nutrition_data.get('calories', "")
+        # Afficher un message en fonction de la classe d'émissions de CO2
+        if co2_emissions_class == 'G':
+            print("Attention: Cet aliment n'est pas bon pour la santé.")
+        elif co2_emissions_class == 'A':
+            print("Bon pour le corps et la planète: Cet aliment est recommandé.")
+        else:
+            print("Classe d'émissions de CO2 inconnue.")
+        return {
+            'dietLabels': diet_labels,
+            'co2EmissionsClass': co2_emissions_class,
+            'calories': calories
+        }
     else:
         print(f"Erreur lors de la récupération des valeurs nutritionnelles. "
-        f"Code de statut: {response.status_code}")
+              f"Code de statut: {response.status_code}")
         return None

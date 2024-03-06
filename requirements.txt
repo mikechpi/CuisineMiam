@@ -1,0 +1,17 @@
+certifi==2024.2.2
+charset-normalizer==3.3.2
+colorama==0.4.6
+coverage==7.4.3
+flake8==7.0.0
+idna==3.6
+iniconfig==2.0.0
+mccabe==0.7.0
+packaging==23.2
+pluggy==1.4.0
+pycodestyle==2.11.1
+pyflakes==3.2.0
+pytest==8.0.2
+pytest-cov==4.1.0
+python-dotenv==1.0.1
+requests==2.31.0
+urllib3==2.2.1

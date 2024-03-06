@@ -2,17 +2,21 @@ from nutrition_api import get_nutritional_value_by_ingredients
 
 
 def test_get_nutritional_value():
+    # Définir l'ingrédient choisi comme le steak
+    ingredient = "steak"
 
-    # Demander à l'utilisateur de saisir l'ingrédient
-    ingredient = input("Rentrez l'ingrédiant choisi : ")
+    # Afficher l'ingrédient choisi
+    print("Ingrédient choisi :", ingredient)
 
-    # Test avec l'ingrédient saisi
-    print("Test avec l'ingrédient saisi :", ingredient)
+    # Obtenir la valeur nutritionnelle de l'ingrédient
     result = get_nutritional_value_by_ingredients([ingredient])
+
+    # Afficher le résultat
     if result is not None:
-        print("Résultat du test avec l'ingrédient saisi :", result)
+        print("Résultat de la valeur nutritionnelle :", result)
     else:
-        print("Échec du test avec l'ingrédient saisi.")
+        print("Échec de l'obtention de la valeur nutritionnelle.")
+
     print()
 
 

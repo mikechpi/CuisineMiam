@@ -11,8 +11,8 @@ def get_nutritional_value_by_ingredients(ingredient):
     base_url = "https://api.edamam.com/api/nutrition-data"
 
     # Paramètres de l'API Edamam (app_id et app_key)
-    app_id = os.getenv("APP_ID")
-    app_key = os.getenv("APP_KEY")
+    app_id = os.getenv("API_ID_NUTRITION_BIS")
+    app_key = os.getenv("API_KEY_NUTRITION_BIS")
 
     # Vérifier que les clés d'API ont été chargées correctement
     if not app_id or not app_key:

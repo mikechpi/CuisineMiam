@@ -3,9 +3,9 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-URL = os.getenv("baseUrl")
-KEY = os.getenv("apiKey")
-ID = os.getenv("apiId")
+URL = "https://api.edamam.com/api/recipes/v2?type=public"
+KEY = os.getenv("API_KEY_FOOD")
+ID = os.getenv("API_ID_FOOD")
 
 
 def getNameRecipesByNameIngredients(ingredients):

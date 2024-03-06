@@ -51,7 +51,7 @@ def get_nutritional_value_by_ingredients(ingredient):
         if co2_emissions_class == 'G':
             print("Attention: Cet aliment n'est pas bon pour la santé.")
         elif co2_emissions_class == 'A':
-            print("Bon pour le corps et la planète: Cet aliment est recommandé.")
+            print("Bon pour le corps et la planète: Cet aliment est good.")
         else:
             print("Classe d'émissions de CO2 inconnue.")
         return {

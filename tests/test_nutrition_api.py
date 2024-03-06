@@ -1,8 +1,8 @@
 from nutrition_api import get_nutritional_value_by_ingredients
-import pytest
-import os
-def test_get_nutritional_value():    
-    
+
+
+def test_get_nutritional_value():
+
     # Demander à l'utilisateur de saisir l'ingrédient
     ingredient = input("Rentrez l'ingrédiant choisi : ")
 
@@ -15,8 +15,6 @@ def test_get_nutritional_value():
         print("Échec du test avec l'ingrédient saisi.")
     print()
 
+
 if __name__ == "__main__":
     test_get_nutritional_value()
-
-
-

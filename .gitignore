@@ -8,5 +8,4 @@ _pycache_/
 htmlcov/
 docs/_build/
 dist/
-venv/
-.venv
+cookingIa/

@@ -1,12 +1,41 @@
 from nutritionalValue import Nutrition
 
 
-def test_get_nutritional_value_by_ingredients():
-    foods = Nutrition.get_nutritional_value_by_ingredients("egg")
-    assert len(foods) > 0
-    for food in foods:
-        assert 'label' in food['food']
-        assert 'nutrients' in food['food']
+def test_get_nutritional_value_by_ingredients(monkeypatch):
+    # Mocking variables
+    monkeypatch.setenv("baseUrl",
+                       "https://api.edamam.com/api/food-database/v2/parser?")
+    monkeypatch.setenv("apiKey",
+                       "eb6ea35df7c8575bc23b17d0c36e1706")
+    monkeypatch.setenv("apiId",
+                       "4a23515f")
+
+    class MockResponse:
+        def __init__(self, json_data, status_code):
+            self.json_data = json_data
+            self.status_code = status_code
+
+        def json(self):
+            return self.json_data
+
+    def mock_get(url):
+        return MockResponse({"hints":
+                             [{"food":
+                               {"label": "Egg", "nutrients":
+                                {'ENERC_KCAL': 143.0, 'PROCNT': 12.6,
+                                 'FAT': 9.51, 'CHOCDF': 0.72,
+                                 'FIBTG': 0.0}}}]}, 200)
+
+    monkeypatch.setattr("requests.get", mock_get)
+
+    # Test
+    ingredient = "Egg"
+    recipes = Nutrition.get_nutritional_value_by_ingredients(ingredient)
+    assert len(recipes) > 0
+    assert recipes[0]['food']['label'] == "Egg"
+    assert recipes[0]['food']['nutrients'] == {'ENERC_KCAL': 143.0,
+                                               'PROCNT': 12.6, 'FAT': 9.51,
+                                               'CHOCDF': 0.72, 'FIBTG': 0.0}
 
 
 def test_display_foods(capfd):

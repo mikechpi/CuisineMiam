@@ -1,3 +1,9 @@
+*.log
+
+.pytest_cache
+__pycache__/
+
+rapport_flake8
+
 .env
 .coverage
-__pycache__/

@@ -1,23 +1,25 @@
-import requests
+import os
 # La bibliothèque 'requests' permet de faire des requêtes HTTP depuis Python
-
-
+import requests
 # Chargement des variables d'environnement depuis un fichier .env
 from dotenv import load_dotenv
 load_dotenv()
 
+API_ID = os.getenv("API_ID_FOOD_BIS")
+API_KEY = os.getenv("API_KEY_FOOD_BIS")
 
-def get_recipe_by_name(api_key, recipe_name):
+
+def get_recipe_by_name(recipe_name):
     # La fonction get_recipe_by_name prend en entrée une
     # clé API et le nom d'une recette
-    base_url = (
-        "https://api.edamam.com/api/recipes/v2"
-        "?type=public&app_id=9c60bb8a&app_key=46df1aff8431edce2ce1f40a0b9bb08e"
-    )
-    # base_url = "https://api.spoonacular.com/recipes/findByIngredients"
+
+    base_url = "https://api.edamam.com/api/recipes/v2?type=public"
+    
+    final_url = f"{base_url}&app_id={API_ID}&app_key={API_KEY}"
+
     params = {"q": recipe_name}
 
-    response = requests.get(base_url, params=params)
+    response = requests.get(final_url, params=params)
     # envoie une requête GET à l'API Edamam avec les paramètres spécifiés,
     # et stocke la réponse dans une variable 'response'
 
@@ -42,8 +44,7 @@ api_key = "46df1aff8431edce2ce1f40a0b9bb08e"
 
 if __name__ == '__main__':
     recipe_name = input("Quelle recette cherchez-vous ? ")
-    recipe = get_recipe_by_name(api_key, recipe_name)
+    recipe = get_recipe_by_name(recipe_name)
     if recipe:
         print(f"Nom de la recette: {recipe['label']}")
         print(f"Ingrédients: {recipe['ingredientLines']}")
-        print(f"Instructions: {recipe['url']}")

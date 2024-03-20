@@ -37,9 +37,12 @@ def test_GetNameRecipesByNameIngredients_success(monkeypatch):
 
 def test_getNameRecipesByNameIngredients_failure(monkeypatch, capsys):
     # Mocking variables
-    monkeypatch.setenv("baseUrl", "your_base_url")
-    monkeypatch.setenv("apiKey", "your_api_key")
-    monkeypatch.setenv("apiId", "your_api_id")
+    monkeypatch.setenv("baseUrl",
+                       "https://api.edamam.com/api/recipes/v2?type=public")
+    monkeypatch.setenv("apiKey",
+                       "5c0e46d6a1d3106ff55a5e2925e27f76")
+    monkeypatch.setenv("apiId",
+                       "8a33a29b")
 
     class MockResponse:
         def __init__(self, json_data, status_code):

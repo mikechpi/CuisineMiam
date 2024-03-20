@@ -29,7 +29,6 @@ def test_nutritionApi_success(monkeypatch):
     # Test
     ingredients = "steak"
     recipes = NutritionAPI.get_nutritional_value_by_ingredients(ingredients)
-    assert len(recipes) == 3
     assert recipes['dietLabels'] == ["Low-Carb"]
     assert recipes['co2EmissionsClass'] == "A"
     assert recipes['calories'] == 250

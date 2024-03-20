@@ -1,5 +1,6 @@
 from get_recipe_by_name import get_recipe_by_name
 
+
 def test_GetRecipeByName_succes(monkeypatch):
     monkeypatch.setenv("baseUrl",
                        "https://api.edamam.com/api/recipes/v2")
@@ -20,7 +21,7 @@ def test_GetRecipeByName_succes(monkeypatch):
         return MockResponse({"hits":
                             [{"recipe":
                               {"label": "Test Recipe", "ingredientLines":
-                                ["pizza"]}}]}, 200)
+                               ["pizza"]}}]}, 200)
 
     monkeypatch.setattr("requests.get", mock_get)
 

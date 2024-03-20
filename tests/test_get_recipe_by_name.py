@@ -6,8 +6,8 @@ def test_get_recipe_by_name():
     api_key = "46df1aff8431edce2ce1f40a0b9bb08e"
     recipes_to_test = [
         ("pizza", {"label": "Pizza Dough"}),
-        ("salade", {"label": "Salade Aux Lardons"}),
-        ("tarte", {"label": "Baby Beet Tarte Tatin from 'River Cottage Veg'"}),
+        ("salade", {"label": "Salade Indochinoise"}),
+        ("tarte", {"label": "Tarte Tatin"}),
         ("pâtes", {"label": "(Very) Peppery Pate"}),
         ("recette inexistante", None)
     ]

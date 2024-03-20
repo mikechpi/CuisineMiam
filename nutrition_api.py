@@ -2,64 +2,68 @@ import requests
 from dotenv import load_dotenv
 import os
 
+class NutritionAPI:
+    @staticmethod
+    def get_nutritional_value_by_ingredients(ingredient):
+        load_dotenv()
 
-def get_nutritional_value_by_ingredients(ingredient):
-    # Charger les informations d'identification depuis le fichier .env
-    load_dotenv()
+        base_url = "https://api.edamam.com/api/nutrition-data"
+        app_id = os.getenv("API_ID_NUTRITION_BIS")
+        app_key = os.getenv("API_KEY_NUTRITION_BIS")
 
-    # Base URL de l'API Edamam
-    base_url = "https://api.edamam.com/api/nutrition-data"
+        if not app_id or not app_key:
+            print("Erreur: Les clés d'API Edamam n'ont pas été chargées.")
+            return None
 
-    # Paramètres de l'API Edamam (app_id et app_key)
-    app_id = os.getenv("API_ID_NUTRITION_BIS")
-    app_key = os.getenv("API_KEY_NUTRITION_BIS")
 
-    # Vérifier que les clés d'API ont été chargées correctement
-    if not app_id or not app_key:
-        print("Erreur: Les clés d'API Edamam n'ont pas été chargées.")
-        return None
+        # params = {
+        #     "app_id": app_id,
+        #     "app_key": app_key,
+        #     "nutrition-type": "logging",
+        #     "ingr": ingredient
+        # }
 
-    # Construire l'URL de requête
-    params = {
-        "app_id": app_id,
-        "app_key": app_key,
-        "nutrition-type": "logging",
-        "ingr": ingredient
-    }
+        first_url = f"{base_url}&app_id={app_id}&app_key={app_key}"
 
-    try:
-        print("Envoi de la requête à l'API Edamam...")
-        response = requests.get(base_url, params=params)
-        # Lèvera une exception si le code de statut HTTP n'est pas 2xx
-        response.raise_for_status()
-        print("Réponse reçue avec succès de l'API Edamam.")
-    except requests.exceptions.HTTPError as err:
-        print(f"Erreur HTTP lors de la requête à l'API Edamam: {err}")
-        return None
-    except requests.exceptions.RequestException as err:
-        print(f"Une erreur lors de la requête à l'API Edamam: {err}")
-        return None
+        second_url = f"&ingr={ingredient}&nutrition-type=logging"
 
-    # Traiter la réponse et retourner les données nutritionnelles spécifiques
-    if response.status_code == 200:
-        nutrition_data = response.json()
-        # Extraire les données spécifiques
-        diet_labels = nutrition_data.get('dietLabels', [])
-        co2_emissions_class = nutrition_data.get('co2EmissionsClass', "")
-        calories = nutrition_data.get('calories', "")
-        # Afficher un message en fonction de la classe d'émissions de CO2
-        if co2_emissions_class == 'G':
-            print("Attention: Cet aliment n'est pas bon pour la santé.")
-        elif co2_emissions_class == 'A':
-            print("Bon pour le corps et la planète: Cet aliment est good.")
+        final_url = first_url + second_url
+
+        try:
+            print("Envoi de la requête à l'API Edamam...")
+            response = requests.get(final_url)
+            # response.raise_for_status()
+            print("Réponse reçue avec succès de l'API Edamam.")
+        except requests.exceptions.HTTPError as err:
+            print(f"Erreur HTTP lors de la requête à l'API Edamam: {err}")
+            return None
+        except requests.exceptions.RequestException as err:
+            print(f"Une erreur lors de la requête à l'API Edamam: {err}")
+            return None
+
+        if response.status_code == 200:
+            nutrition_data = response.json()
+            diet_labels = nutrition_data.get('dietLabels', [])
+            co2_emissions_class = nutrition_data.get('co2EmissionsClass', "")
+            calories = nutrition_data.get('calories', "")
+
+            if co2_emissions_class == 'G':
+                print("Attention: Cet aliment n'est pas bon pour la santé.")
+            elif co2_emissions_class == 'A':
+                print("Bon pour le corps et la planète: Cet aliment est good.")
+            else:
+                print("Classe d'émissions de CO2 inconnue.")
+            return {
+                'dietLabels': diet_labels,
+                'co2EmissionsClass': co2_emissions_class,
+                'calories': calories
+            }
         else:
-            print("Classe d'émissions de CO2 inconnue.")
-        return {
-            'dietLabels': diet_labels,
-            'co2EmissionsClass': co2_emissions_class,
-            'calories': calories
-        }
-    else:
-        print(f"Erreur lors de la récupération des valeurs nutritionnelles. "
-              f"Code de statut: {response.status_code}")
-        return None
+            print(f"Erreur lors de la récupération des valeurs nutritionnelles. "
+                  f"Code de statut: {response.status_code}")
+            return None
+
+if __name__ == "__main__":
+    ingredient = input("Entrez un ingrédient : ")
+    result = NutritionAPI.get_nutritional_value_by_ingredients(ingredient)
+    print(result)

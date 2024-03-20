@@ -12,7 +12,7 @@ class NutritionAPI:
         api_id = os.getenv("API_ID_NUTRITION_BIS")
         api_key = os.getenv("API_KEY_NUTRITION_BIS")
 
-        if not app_id or not app_key:
+        if not api_id or not api_key:
             print("Erreur: Les clés d'API Edamam n'ont pas été chargées.")
             return None
 

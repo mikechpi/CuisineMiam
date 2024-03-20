@@ -29,28 +29,7 @@ def test_nutritionApi_success(monkeypatch):
     # Test
     ingredients = "steak"
     recipes = NutritionAPI.get_nutritional_value_by_ingredients(ingredients)
+    assert len(recipes) == 3
     assert recipes['dietLabels'] == ["Low-Carb"]
     assert recipes['co2EmissionsClass'] == "A"
     assert recipes['calories'] == 250
-
-# def test_get_nutritional_value():
-#     # Définir l'ingrédient choisi comme le steak
-#     # ingredient = "steak"
-
-#     # Afficher l'ingrédient choisi
-#     print("Ingrédient choisi :", ingredient)
-
-#     # Obtenir la valeur nutritionnelle de l'ingrédient
-#     result = NutritionAPI.get_nutritional_value_by_ingredients([ingredient])
-
-#     # Afficher le résultat
-#     if result is not None:
-#         print("Résultat de la valeur nutritionnelle :", result)
-#     else:
-#         print("Échec de l'obtention de la valeur nutritionnelle.")
-
-#     print()
-
-
-# if __name__ == "__main__":
-#     test_get_nutritional_value()

@@ -16,12 +16,6 @@ class NutritionAPI:
             print("Erreur: Les clés d'API Edamam n'ont pas été chargées.")
             return None
 
-        # params = {
-        #     "app_id": app_id,
-        #     "app_key": app_key,
-        #     "nutrition-type": "logging",
-        #     "ingr": ingredient
-        # }
 
         first_url = f"{base_url}&app_id={api_id}&app_key={api_key}"
 

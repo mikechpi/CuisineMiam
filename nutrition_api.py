@@ -9,8 +9,8 @@ class NutritionAPI:
         load_dotenv()
 
         base_url = "https://api.edamam.com/api/nutrition-data"
-        app_id = os.getenv("API_ID_NUTRITION_BIS")
-        app_key = os.getenv("API_KEY_NUTRITION_BIS")
+        api_id = os.getenv("API_ID_NUTRITION_BIS")
+        api_key = os.getenv("API_KEY_NUTRITION_BIS")
 
         if not app_id or not app_key:
             print("Erreur: Les clés d'API Edamam n'ont pas été chargées.")
@@ -23,7 +23,7 @@ class NutritionAPI:
         #     "ingr": ingredient
         # }
 
-        first_url = f"{base_url}&app_id={app_id}&app_key={app_key}"
+        first_url = f"{base_url}&app_id={api_id}&app_key={api_key}"
 
         second_url = f"&ingr={ingredient}&nutrition-type=logging"
 

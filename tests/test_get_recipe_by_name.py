@@ -1,5 +1,6 @@
 from get_recipe_by_name import get_recipe_by_name
 
+
 def test_GetRecipeByName_succes(monkeypatch):
     monkeypatch.setenv("baseUrl",
                        "https://api.edamam.com/api/recipes/v2")
@@ -7,7 +8,7 @@ def test_GetRecipeByName_succes(monkeypatch):
                        "46df1aff8431edce2ce1f40a0b9bb08e")
     monkeypatch.setenv("apiId",
                        "9c60bb8a")
-    
+
     class MockResponse:
         def __init__(self, json_data, status_code):
             self.json_data = json_data
@@ -15,13 +16,13 @@ def test_GetRecipeByName_succes(monkeypatch):
 
         def json(self):
             return self.json_data
-        
+
     def mock_get(url):
         return MockResponse({"hits":
                             [{"recipe":
                               {"label": "Test Recipe", "ingredientLines":
-                                ["pizza"]}}]}, 200)
-    
+                               ["pizza"]}}]}, 200)
+
     monkeypatch.setattr("requests.get", mock_get)
 
     recipe_name = "pizza"
@@ -46,10 +47,10 @@ def test_GetRecipeByName_failure(monkeypatch, capsys):
 
         def json(self):
             return self.json_data
-        
+
     def mock_get(url):
         return MockResponse(None, 404)
-    
+
     monkeypatch.setattr("requests.get", mock_get)
 
     recipes_name = ""
@@ -57,5 +58,3 @@ def test_GetRecipeByName_failure(monkeypatch, capsys):
     captured = capsys.readouterr()
     assert recipes == []
     assert "Erreur lors de la requête à l'API: 404" in captured.out
-
-

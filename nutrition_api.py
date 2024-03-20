@@ -2,6 +2,7 @@ import requests
 from dotenv import load_dotenv
 import os
 
+
 class NutritionAPI:
     @staticmethod
     def get_nutritional_value_by_ingredients(ingredient):
@@ -14,7 +15,6 @@ class NutritionAPI:
         if not app_id or not app_key:
             print("Erreur: Les clés d'API Edamam n'ont pas été chargées.")
             return None
-
 
         # params = {
         #     "app_id": app_id,
@@ -59,9 +59,10 @@ class NutritionAPI:
                 'calories': calories
             }
         else:
-            print(f"Erreur lors de la récupération des valeurs nutritionnelles. "
+            print(f"Erreur lors de la récup des valeurs nutritionnelles. "
                   f"Code de statut: {response.status_code}")
             return None
+
 
 if __name__ == "__main__":
     ingredient = input("Entrez un ingrédient : ")

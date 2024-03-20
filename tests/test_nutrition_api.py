@@ -20,7 +20,9 @@ def test_nutritionApi_success(monkeypatch):
             return self.json_data
 
     def mock_get(url):
-        return MockResponse({"dietLabels": ["Low-Carb"], "co2EmissionsClass": "A", "calories": 250}, 200)
+        return MockResponse({"dietLabels": ["Low-Carb"],
+                            "co2EmissionsClass": "A",
+                             "calories": 250}, 200)
 
     monkeypatch.setattr("requests.get", mock_get)
 

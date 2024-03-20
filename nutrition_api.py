@@ -2,6 +2,8 @@ import requests
 from dotenv import load_dotenv
 import os
 
+api_id = os.getenv("API_ID_NUTRITION_BIS")
+api_key = os.getenv("API_KEY_NUTRITION_BIS")
 
 class NutritionAPI:
     @staticmethod
@@ -9,8 +11,6 @@ class NutritionAPI:
         load_dotenv()
 
         base_url = "https://api.edamam.com/api/nutrition-data"
-        api_id = os.getenv("API_ID_NUTRITION_BIS")
-        api_key = os.getenv("API_KEY_NUTRITION_BIS")
 
         if not api_id or not api_key:
             print("Erreur: Les clés d'API Edamam n'ont pas été chargées.")

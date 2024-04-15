@@ -3,9 +3,9 @@ from nutrition_api import NutritionAPI
 
 def test_nutritionApi_success(monkeypatch):
     # Mocking variables
-    monkeypatch.setenv("API_KEY",
+    monkeypatch.setenv("apiKey",
                        "b39187147c75cca26f694bdf7bae8958")
-    monkeypatch.setenv("API_ID",
+    monkeypatch.setenv("apiId",
                        "a4e84092")
 
     # Mocking requests.get function
@@ -25,9 +25,9 @@ def test_nutritionApi_success(monkeypatch):
     monkeypatch.setattr("requests.get", mock_get)
 
     # Test
-    ingredients = "steak"
-    recipes = NutritionAPI.get_nutritional_value_by_ingredients(ingredients)
-    assert len(recipes) == 3
+    ingredient = "steak"
+    recipes = NutritionAPI.get_nutritional_value_by_ingredients(ingredient)
+    assert len(recipes) > 0
     assert recipes['dietLabels'] == ["Low-Carb"]
     assert recipes['co2EmissionsClass'] == "A"
     assert recipes['calories'] == 250

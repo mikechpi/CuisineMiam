@@ -18,7 +18,7 @@ class NutritionAPI:
             return None
 
 
-        first_url = f"{base_url}&app_id={API_ID}&app_key={API_KEY}"
+        first_url = f"{base_url}?app_id={API_ID}&app_key={API_KEY}"
 
         second_url = f"&ingr={ingredient}&nutrition-type=logging"
 

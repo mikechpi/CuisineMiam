@@ -7,7 +7,7 @@ API_ID = os.getenv("API_ID_NUTRITION_BIS")
 API_KEY = os.getenv("API_KEY_NUTRITION_BIS")
 
 class NutritionAPI:
-    @staticmethod
+
     def get_nutritional_value_by_ingredients(ingredient):
 
 

@@ -13,8 +13,8 @@ class Nutrition:
         base_url = "https://api.edamam.com/api/food-database/v2/parser?"
 
         ingredients_param = ingredient
-        print( f"""
- 
+        print(f"""
+
 Fonctionne : ok --> f"{base_url}&app_id={API_ID}&app_key={API_KEY}"
 
 """)

@@ -3,9 +3,9 @@ from nutrition_api import NutritionAPI
 
 def test_nutritionApi_success(monkeypatch):
     # Mocking variables
-    monkeypatch.setenv("apiKey",
+    monkeypatch.setenv("API_KEY",
                        "b39187147c75cca26f694bdf7bae8958")
-    monkeypatch.setenv("apiId",
+    monkeypatch.setenv("API_ID",
                        "a4e84092")
 
     # Mocking requests.get function

@@ -5,6 +5,12 @@ load_dotenv()
 
 API_ID = os.getenv("apiId")
 API_KEY = os.getenv("apiKey")
+print(f"""
+GLOBAL
+        API_ID =  {API_ID}
+        API_KEY = {API_KEY}
+
+""")
 class NutritionAPI:
 
     def get_nutritional_value_by_ingredients(ingredient):

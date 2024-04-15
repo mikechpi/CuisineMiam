@@ -15,7 +15,6 @@ def getNameRecipesByNameIngredients(ingredients):
     app_key = KEY
 
     final_url = f"{base_url}&q={ingredients}&app_id={app_id}&app_key={app_key}"
-    print("final_url: ", final_url)
 
     response = requests.get(final_url)
 

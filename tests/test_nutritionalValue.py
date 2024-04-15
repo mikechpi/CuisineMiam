@@ -37,6 +37,7 @@ def test_get_nutritional_value_by_ingredients_success(monkeypatch):
                                                'PROCNT': 12.6, 'FAT': 9.51,
                                                'CHOCDF': 0.72, 'FIBTG': 0.0}
 
+
 def test_get_nutritional_value_by_ingredients_failure(monkeypatch):
     # Mocking variables
     monkeypatch.setenv("baseUrl",

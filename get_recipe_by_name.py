@@ -16,7 +16,6 @@ def get_recipe_by_name(recipe_name):
 
     response = requests.get(final_url)
 
-
     if response.status_code == 200:
         data = response.json()
         return data.get('hits', [])

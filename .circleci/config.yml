@@ -22,7 +22,7 @@ jobs:
       # See:https://circleci.com/developer/images/image/cimg/python
       - image: cimg/python:3.12
 
-    environnement : 
+    environment : 
       API_ID_NUTRITION=4a23515f
       API_KEY_NUTRITION=eb6ea35df7c8575bc23b17d0c36e1706
 

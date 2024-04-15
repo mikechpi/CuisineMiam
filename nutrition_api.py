@@ -5,13 +5,12 @@ load_dotenv()
 
 API_ID = os.getenv("apiId")
 API_KEY = os.getenv("apiKey")
-
-
 class NutritionAPI:
 
     def get_nutritional_value_by_ingredients(ingredient):
         base_url = "https://api.edamam.com/api/nutrition-data?"
-
+        API_ID = os.getenv("apiId")
+        API_KEY = os.getenv("apiKey")
         print("*******", API_ID)
         print("*******", API_KEY)
 

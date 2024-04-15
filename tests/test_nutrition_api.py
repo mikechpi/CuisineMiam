@@ -4,7 +4,7 @@ from nutrition_api import NutritionAPI
 def test_nutritionApi_success(monkeypatch):
     # Mocking variables
     monkeypatch.setenv("baseUrl",
-                       "https://api.edamam.com/api/nutrition-data")
+                       "https://api.edamam.com/api/nutrition-data?")
     monkeypatch.setenv("apiKey",
                        "b39187147c75cca26f694bdf7bae8958")
     monkeypatch.setenv("apiId",

@@ -3,8 +3,8 @@ import requests
 from dotenv import load_dotenv
 load_dotenv()
 
-API_ID = os.getenv("apiId")
-API_KEY = os.getenv("apiKey")
+API_ID = os.getenv("API_ID_NUTRITION_BIS")
+API_KEY = os.getenv("API_KEY_NUTRITION_BIS")
 print(f"""
 GLOBAL
         API_ID =  {API_ID}

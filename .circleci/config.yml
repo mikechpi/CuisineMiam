@@ -10,6 +10,7 @@ version: 2.1
 orbs:
   # See the Python orb documentation here: https://circleci.com/developer/orbs/orb/circleci/python
   python: circleci/python@2.1.1
+  env: circleci/env@1.1.0
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/jobs-steps/#jobs-overview & https://circleci.com/docs/configuration-reference/#jobs
@@ -27,6 +28,8 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
+      - env/load:
+          path: .env
       - python/install-packages:
           pkg-manager: pip
           # app-dir: ~/project/package-directory/  # If your requirements.txt isn't in the root directory.

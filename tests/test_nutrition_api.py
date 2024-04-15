@@ -7,6 +7,9 @@ def test_nutritionApi_success(monkeypatch):
                        "b39187147c75cca26f694bdf7bae8958")
     monkeypatch.setenv("apiId",
                        "a4e84092")
+    
+
+    print("______**********________", monkeypatch)
 
     # Mocking requests.get function
     class MockResponse:

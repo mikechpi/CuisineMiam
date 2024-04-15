@@ -1,6 +1,6 @@
 from nutrition_api import NutritionAPI
 
-
+import os
 def test_nutritionApi_success(monkeypatch):
     # Mocking variables
     monkeypatch.setenv("apiKey",
@@ -8,7 +8,8 @@ def test_nutritionApi_success(monkeypatch):
     monkeypatch.setenv("apiId",
                        "a4e84092")
     
-
+    for cle, valeur in os.environ.items() :
+        print(cle, valeur, " <--")
     print("______**********________", monkeypatch)
 
     # Mocking requests.get function

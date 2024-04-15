@@ -14,7 +14,7 @@ class NutritionAPI:
 
         if not API_ID or not API_KEY:
             print("Erreur: Les clés d'API Edamam n'ont pas été chargées.")
-            return None
+            return
 
         first_url = f"{base_url}app_id={API_ID}&app_key={API_KEY}"
 

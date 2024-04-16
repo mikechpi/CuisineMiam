@@ -36,6 +36,7 @@ if __name__ == '__main__':
     ingredients = [ingredient.strip() for ingredient in user_input.split(',')]
     recipes = getNameRecipesByNameIngredients(ingredients)
     for recipe in recipes:
+        print("-------ON EST EN PRESENTATION--------")
         print(f"Name of the recipes : {recipe['recipe']['label']}")
         print(f"Ingredients: {recipe['recipe']['ingredientLines']}")
         print("-----")
